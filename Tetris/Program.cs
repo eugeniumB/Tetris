@@ -1,31 +1,21 @@
 ﻿namespace Tetris
 {
-    public class Point
-    {
-        public Point(int x, int y, char c = '*')
-        {
-
-        }
-
-    }
-
     public class Program
     {
-        static void Draw(int x, int y, char c)
-        {
-            Console.SetCursorPosition(x, y);
-            Console.Write(c);
-        }
         static void Main(string[] args)
         {
             Console.SetWindowSize(40, 30);
             Console.SetBufferSize(40, 30);
 
-            int x1 = 2;
-            int y1 = 3;
-            char c1 = '*';
+            Point p1 = new Point(2, 3);
+            Point p2 = new Point(4, 5);
+            Point p3 = new Point(6, 7);
 
-            Draw(x1, y1, c1);
+            Square square = new Square(p1);
+            square.DrawSquare();
+            Stick stick = new Stick(p3);
+            stick.DrawStick();
+
 
             Console.ReadLine();
         }
