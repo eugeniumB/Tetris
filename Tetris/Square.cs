@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Tetris
 {
-    internal class Square
+    internal class Square : Figure
     {
-        Point[] points = new Point[4];
-
         public Square(Point p)
         {
             points[0] = new Point(p.x, p.y);
@@ -17,12 +15,10 @@ namespace Tetris
             points[2] = new Point(p.x, p.y + 1);
             points[3] = new Point(p.x + 1, p.y + 1);
         }
-        public void DrawSquare()
+
+        public override void Rotate()
         {
-            for (int i = 0; i < points.Length; i++)
-            {
-                points[i].Draw();
-            }
+        
         }
     }
 }
