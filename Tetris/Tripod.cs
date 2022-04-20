@@ -18,37 +18,56 @@ namespace Tetris
 
         public override void Rotate()
         {
-            if (points[2].y == points[2].y - 1)
+            if (points[3].y + 1 == points[0].y)
                 SetRight();
             else
-                if (points[2].y == points[2].y + 1)
+                if (points[3].y - 1 == points[0].y)
                 SetLeft();
             else
-                if (points[3].y == points[2].y - 1)
+                if (points[3].x + 1 == points[0].x)
                 SetDefalt();
             else
-                SetConversaly()
-
+                SetConversaly();
         }
 
         private void SetConversaly()
         {
-            throw new NotImplementedException();
+            points[1].x -= 1;
+            points[1].y -= 1;
+            points[2].x += 1;
+            points[2].y += 1;
+            points[3].x -= 1;
+            points[3].y += 1;
         }
 
         private void SetDefalt()
         {
-            throw new NotImplementedException();
+            points[1].x += 1;
+            points[1].y += 1;
+            points[2].x -= 1;
+            points[2].y -= 1;
+            points[3].x += 1;
+            points[3].y -= 1;
         }
 
         private void SetLeft()
         {
-            throw new NotImplementedException();
+            points[1].x += 1;
+            points[1].y -= 1;
+            points[2].x -= 1;
+            points[2].y += 1;
+            points[3].x -= 1;
+            points[3].y -= 1;
         }
 
         private void SetRight()
         {
-            throw new NotImplementedException();
+            points[1].x -= 1;
+            points[1].y += 1;
+            points[2].x += 1;
+            points[2].y -= 1;
+            points[3].x += 1;
+            points[3].y += 1;
         }
 
     }
