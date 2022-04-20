@@ -11,15 +11,18 @@
             Point p2 = new(4, 5);
             Point p3 = new(6, 7);
 
-            Figure[] figures = new Figure[2];
-            figures[0] = new Square(p1);
-            figures[1] = new Stick(p3);
+            Figure tripod = new Tripod(p1);
+            tripod.Draw();
 
-            figures[1].Draw();
-            Thread.Sleep(1000);
-            figures[1].Hide();
-            figures[1].Rotate();
-            figures[1].Draw();
+            //Figure[] figures = new Figure[2];
+            //figures[0] = new Square(p1);
+            //figures[1] = new Stick(p3);
+
+            //figures[1].Draw();
+            //Thread.Sleep(1000);
+            //figures[1].Hide();
+            //figures[1].Rotate();
+            //figures[1].Draw();
 
             Console.ReadLine();
         }
