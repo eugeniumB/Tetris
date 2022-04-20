@@ -7,12 +7,29 @@
             Console.SetWindowSize(40, 30);
             Console.SetBufferSize(40, 30);
 
-            Point p1 = new(2, 3);
-            Point p2 = new(4, 5);
-            Point p3 = new(6, 7);
+            Point p = new(20, 4);
 
-            Figure tripod = new Tripod(p1);
-            tripod.Draw();
+            RandFig generator = new RandFig(p);
+            Figure s = null;
+
+            while (true)
+            {
+                FigureFall(s, generator);
+            }
+
+            static void FigureFall(Figure fig, RandFig generator)
+            {
+                fig = generator.GetNewFigure();
+                fig.Draw();
+
+                for (int i = 0; i < 15; i++)
+                {
+                    fig.Hide();
+                    fig.Move(Direction.down);
+                    fig.Draw();
+                    Thread.Sleep(200);
+                }
+            }
 
             //Figure[] figures = new Figure[2];
             //figures[0] = new Square(p1);
@@ -26,7 +43,6 @@
 
             Console.ReadLine();
         }
-
     }
-
+    
 }
