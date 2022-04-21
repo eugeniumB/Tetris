@@ -25,14 +25,22 @@ namespace Tetris
             }
         }
 
-        public void Move(Direction dir)
+        //public void Move(Direction dir)
+        //{
+        //    Hide();
+        //    foreach (Point point in points)
+        //    {
+        //        point.Move(dir);
+        //    }
+        //    Draw();
+        //}
+
+        private void Move(Point[] pList, Direction dir)
         {
-            Hide();
-            foreach (Point point in points)
+            foreach (Point point in pList)
             {
                 point.Move(dir);
             }
-            Draw();
         }
 
         public void Hide()
@@ -44,6 +52,35 @@ namespace Tetris
         }
 
         public abstract void Rotate();
-     
+
+        internal void TryMove(Direction dir)
+        {
+            Hide();
+            Point[] clone = Clone();
+            Move(clone, dir);
+            if (VerifyPosition(clone))
+                points = clone;
+            Draw();
+        }
+
+        private bool VerifyPosition(Point[] pList)
+        {
+            foreach (Point p in pList)
+            {
+                if (p.x < 0 || p.y < 0 || p.x >= Console.BufferWidth - 1 || p.y >= Console.BufferHeight - 1)
+                    return false;
+            }
+            return true;
+        }
+
+        private Point[] Clone()
+        {
+            Point[] newPoint = new Point[points.Length];
+            for (int i = 0; i < newPoint.Length; i++)
+            {
+                newPoint[i] = points[i];
+            }
+            return newPoint;
+        }
     }
 }
