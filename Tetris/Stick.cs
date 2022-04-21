@@ -13,14 +13,19 @@ namespace Tetris
             points[1] = new Point(p.x, p.y + 1);
             points[2] = new Point(p.x, p.y + 2);
             points[3] = new Point(p.x, p.y + 3);
+            Draw();
         }
 
         public override void Rotate()
         {
+            Hide();
+
             if (points[0].x == points[1].x)
                 SetHorisontal();
             else
                 SetVertical();
+            Draw();
+
         }
 
         private void SetVertical()
