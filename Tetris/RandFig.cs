@@ -19,18 +19,67 @@ namespace Tetris
         internal Figure GetNewFigure()
         {
             if (_rand.Next(0, 5) == 0)
-                return new Square(_p);
+            {
+                Figure f = new Square(_p);
+                RandomRotate(f);
+                return f;
+            }
             else
                 if (_rand.Next(0, 5) == 1)
-                return new Stick(_p);
+            {
+                Figure f = new Stick(_p);
+                RandomRotate(f);
+                return f;
+            }
             else
                 if (_rand.Next(0, 5) == 2)
-                return new Tripod(_p);
+            {
+                Figure f = new Tripod(_p);
+                RandomRotate(f);
+                return f;
+            }
             else
                 if (_rand.Next(0, 5) == 3)
-                return new AngleLeft(_p);
-            else 
-                return new AngleRight(_p);
+            {
+                Figure f = new AngleLeft(_p);
+                RandomRotate(f);
+                return f;
+            }
+            else
+            {
+                Figure f = new AngleRight(_p);
+                RandomRotate(f);
+                return f;
+            }
+        }
+
+        private void RandomRotate(Figure f)
+        {
+            if (_rand.Next(0, 4) == 0)
+                f.Rotate();
+            else
+                if (_rand.Next(0, 5) == 1)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    f.Rotate();
+                }
+            }
+            else
+                if (_rand.Next(0, 5) == 2)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    f.Rotate();
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    f.Rotate();
+                }
+            }
         }
     }
 }
