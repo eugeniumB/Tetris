@@ -8,9 +8,8 @@ namespace Tetris
 {
     internal class Tripod : Figure
     {
-        public Tripod(Point p)
+        public Tripod(Point p) : base(p)
         {
-            points[0] = new Point(p.x, p.y);
             points[1] = new Point(p.x + 1, p.y);
             points[2] = new Point(p.x - 1, p.y);
             points[3] = new Point(p.x, p.y - 1);
