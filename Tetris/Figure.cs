@@ -10,6 +10,13 @@ namespace Tetris
     {
         protected Point[] points = new Point[4];
 
+        public Point[]? PointArray => points;
+
+        protected Figure(Point p)
+        {
+            points[0] = new Point(p.x, p.y);
+        }
+
         public void Draw()
         {
             for (int i = 0; i < points.Length; i++)
