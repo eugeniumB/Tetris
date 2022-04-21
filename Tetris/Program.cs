@@ -22,24 +22,19 @@
                 fig = generator.GetNewFigure();
                 fig.Draw();
 
-                for (int i = 0; i < 15; i++)
+                for (int i = 0; i < Console.BufferHeight; i++)
                 {
+                    if (fig.PointArray[0].y == Console.BufferHeight - 1 ||
+                        fig.PointArray[1].y == Console.BufferHeight - 1 ||
+                        fig.PointArray[2].y == Console.BufferHeight - 1 ||
+                        fig.PointArray[3].y == Console.BufferHeight - 1)
+                        break;
                     fig.Hide();
                     fig.Move(Direction.down);
                     fig.Draw();
                     Thread.Sleep(200);
                 }
             }
-
-            //Figure[] figures = new Figure[2];
-            //figures[0] = new Square(p1);
-            //figures[1] = new Stick(p3);
-
-            //figures[1].Draw();
-            //Thread.Sleep(1000);
-            //figures[1].Hide();
-            //figures[1].Rotate();
-            //figures[1].Draw();
 
             Console.ReadLine();
         }
