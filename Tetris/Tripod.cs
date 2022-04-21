@@ -13,10 +13,13 @@ namespace Tetris
             points[1] = new Point(p.x + 1, p.y);
             points[2] = new Point(p.x - 1, p.y);
             points[3] = new Point(p.x, p.y - 1);
+            Draw();
         }
 
         public override void Rotate()
         {
+            Hide();
+
             if (points[3].y + 1 == points[0].y)
                 SetRight();
             else
@@ -27,6 +30,8 @@ namespace Tetris
                 SetDefalt();
             else
                 SetConversaly();
+            Draw();
+
         }
 
         private void SetConversaly()
