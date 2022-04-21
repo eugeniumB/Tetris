@@ -8,9 +8,8 @@ namespace Tetris
 {
     internal class Stick : Figure
     {
-        public Stick(Point p)
+        public Stick(Point p) : base(p)
         {
-            points[0] = new Point(p.x, p.y);
             points[1] = new Point(p.x, p.y + 1);
             points[2] = new Point(p.x, p.y + 2);
             points[3] = new Point(p.x, p.y + 3);
