@@ -25,8 +25,6 @@ namespace Tetris
 
         internal void Move(Direction dir)
         {
-
-
             switch (dir)
             {
                 case Direction.left:
