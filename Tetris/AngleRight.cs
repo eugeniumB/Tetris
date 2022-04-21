@@ -8,9 +8,8 @@ namespace Tetris
 {
     internal class AngleRight : Figure
     {
-        public AngleRight(Point p)
+        public AngleRight(Point p) : base(p)
         {
-            points[0] = new Point(p.x, p.y);
             points[1] = new Point(p.x + 1, p.y);
             points[2] = new Point(p.x, p.y - 1);
             points[3] = new Point(p.x, p.y - 2);
