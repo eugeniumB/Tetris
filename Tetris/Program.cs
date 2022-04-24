@@ -4,8 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(40, 30);
-            Console.SetBufferSize(40, 30);
+            Console.SetWindowSize(Field.Width, Field.Height);
+            Console.SetBufferSize(Field.Width, Field.Height);
 
             Point p = new(20, 4);
 
@@ -30,34 +30,34 @@
             switch (key.Key)
             { 
                 case ConsoleKey.Spacebar:
-                    s.Rotate();
+                    s.TryRotate();
                     break;
                 case ConsoleKey.LeftArrow:
-                    s.TryMove(Direction.left);
+                    s.TryMove(Direction.LEFT);
                     break;
                 case ConsoleKey.RightArrow:
-                    s.TryMove(Direction.right);
+                    s.TryMove(Direction.RIGHT);
                     break;
                 case ConsoleKey.DownArrow:
-                    s.TryMove(Direction.down);
+                    s.TryMove(Direction.DOWN);
                     break;
                 case ConsoleKey.A:
-                    s.TryMove(Direction.left);
+                    s.TryMove(Direction.LEFT);
                     break;
                 case ConsoleKey.D:
-                    s.TryMove(Direction.right);
+                    s.TryMove(Direction.RIGHT);
                     break;
                 case ConsoleKey.S:
-                    s.TryMove(Direction.down);
+                    s.TryMove(Direction.DOWN);
                     break;
                 case ConsoleKey.NumPad2:
-                    s.TryMove(Direction.down);
+                    s.TryMove(Direction.DOWN);
                     break;
                 case ConsoleKey.NumPad4:
-                    s.TryMove(Direction.left);
+                    s.TryMove(Direction.LEFT);
                     break;
                 case ConsoleKey.NumPad6:
-                    s.TryMove(Direction.right);
+                    s.TryMove(Direction.RIGHT);
                     break;
             }
 
