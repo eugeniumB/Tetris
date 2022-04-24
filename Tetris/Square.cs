@@ -10,13 +10,13 @@ namespace Tetris
     {
         public Square(Point p) : base(p)
         {
-            points[1] = new Point(p.x + 1, p.y);
-            points[2] = new Point(p.x, p.y + 1);
-            points[3] = new Point(p.x + 1, p.y + 1);
+            Points[1] = new Point(p.X + 1, p.Y);
+            Points[2] = new Point(p.X, p.Y + 1);
+            Points[3] = new Point(p.X + 1, p.Y + 1);
             Draw();
         }
 
-        public override void Rotate()
+        public override void Rotate(Point[] newPoints)
         {
         }
     }
