@@ -10,39 +10,35 @@ namespace Tetris
     {
         public Stick(Point p) : base(p)
         {
-            points[1] = new Point(p.x, p.y + 1);
-            points[2] = new Point(p.x, p.y + 2);
-            points[3] = new Point(p.x, p.y + 3);
+            Points[1] = new Point(p.X, p.Y + 1);
+            Points[2] = new Point(p.X, p.Y + 2);
+            Points[3] = new Point(p.X, p.Y + 3);
             Draw();
         }
 
-        public override void Rotate()
+        public override void Rotate(Point[] newPoints)
         {
-            Hide();
-
-            if (points[0].x == points[1].x)
-                SetHorisontal();
+            if (newPoints[0].X == newPoints[1].X)
+                SetHorisontal(newPoints);
             else
-                SetVertical();
-            Draw();
-
+                SetVertical(newPoints);
         }
 
-        private void SetVertical()
+        private void SetVertical(Point[] newPoints)
         {
-            for (int i = 0; i < points.Length; i++)
+            for (int i = 0; i < Points.Length; i++)
             {
-                points[i].x = points[0].x;
-                points[i].y = points[0].y + i;
+                newPoints[i].X = newPoints[0].X;
+                newPoints[i].Y = newPoints[0].Y + i;
             }
         }
 
-        private void SetHorisontal()
+        private void SetHorisontal(Point[] newPoints)
         {
-            for (int i = 0; i < points.Length; i++)
+            for (int i = 0; i < Points.Length; i++)
             {
-                points[i].y = points[0].y;
-                points[i].x = points[0].x + i; 
+                newPoints[i].Y = newPoints[0].Y;
+                newPoints[i].X = newPoints[0].X + i; 
             }
         }
     }
