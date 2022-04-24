@@ -9,7 +9,7 @@ namespace Tetris
     internal class RandFig
     {
         private Point _p;
-        private Random _rand = new Random();
+        private Random _rand = new();
 
         public RandFig(Point p)
         {
@@ -56,13 +56,13 @@ namespace Tetris
         private void RandomRotate(Figure f)
         {
             if (_rand.Next(0, 4) == 0)
-                f.Rotate();
+                f.TryRotate();
             else
                 if (_rand.Next(0, 5) == 1)
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    f.Rotate();
+                    f.TryRotate();
                 }
             }
             else
@@ -70,14 +70,14 @@ namespace Tetris
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    f.Rotate();
+                    f.TryRotate();
                 }
             }
             else
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    f.Rotate();
+                    f.TryRotate();
                 }
             }
         }
