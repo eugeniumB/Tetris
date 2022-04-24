@@ -8,32 +8,21 @@ namespace Tetris
 {
     abstract class Figure
     {
-        protected Point[] points = new Point[4];
-
-        public Point[]? PointArray => points;
+        const int LENGTH = 4;
+        public Point[] Points = new Point[LENGTH];
 
         protected Figure(Point p)
         {
-            points[0] = new Point(p.x, p.y);
+            Points[0] = new Point(p.X, p.Y);
         }
 
         public void Draw()
         {
-            for (int i = 0; i < points.Length; i++)
+            for (int i = 0; i < Points.Length; i++)
             {
-                points[i].DrawPoint();
+                Points[i].DrawPoint();
             }
         }
-
-        //public void Move(Direction dir)
-        //{
-        //    Hide();
-        //    foreach (Point point in points)
-        //    {
-        //        point.Move(dir);
-        //    }
-        //    Draw();
-        //}
 
         private void Move(Point[] pList, Direction dir)
         {
@@ -45,13 +34,24 @@ namespace Tetris
 
         public void Hide()
         {
-            foreach (Point item in points)
+            foreach (Point item in Points)
             {
                 item.Hide();
             }
         }
 
-        public abstract void Rotate();
+        public abstract void Rotate(Point[] newPoints);
+
+        internal void TryRotate()
+        {
+            Hide();
+            Point[] clone = Clone();
+            Rotate(clone);
+            if (VerifyPosition(clone))
+                Points = clone;
+            Draw();
+        }
+
 
         internal void TryMove(Direction dir)
         {
@@ -59,7 +59,7 @@ namespace Tetris
             Point[] clone = Clone();
             Move(clone, dir);
             if (VerifyPosition(clone))
-                points = clone;
+                Points = clone;
             Draw();
         }
 
@@ -67,7 +67,7 @@ namespace Tetris
         {
             foreach (Point p in pList)
             {
-                if (p.x < 0 || p.y < 0 || p.x >= Console.BufferWidth - 1 || p.y >= Console.BufferHeight - 1)
+                if (p.X < 0 || p.Y < 0 || p.X >= Field.Width || p.Y >= Field.Height)
                     return false;
             }
             return true;
@@ -75,10 +75,10 @@ namespace Tetris
 
         private Point[] Clone()
         {
-            Point[] newPoint = new Point[points.Length];
+            Point[] newPoint = new Point[Points.Length];
             for (int i = 0; i < newPoint.Length; i++)
             {
-                newPoint[i] = points[i];
+                newPoint[i] = new Point(Points[i]);
             }
             return newPoint;
         }
