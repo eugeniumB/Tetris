@@ -8,8 +8,8 @@ namespace Tetris
 {
     internal enum Direction : byte
     {
-        left,
-        right,
-        down
+        LEFT,
+        RIGHT,
+        DOWN
     }
 }
