@@ -10,66 +10,64 @@ namespace Tetris
     {
         public AngleLeft(Point p) : base(p)
         {
-            points[1] = new Point(p.x - 1, p.y);
-            points[2] = new Point(p.x, p.y - 1);
-            points[3] = new Point(p.x, p.y - 2);
+            Points[1] = new Point(p.X - 1, p.Y);
+            Points[2] = new Point(p.X, p.Y - 1);
+            Points[3] = new Point(p.X, p.Y - 2);
             Draw();
         }
 
-        public override void Rotate()
+        public override void Rotate(Point[] newPoints)
         {
-            Hide();
-            if (points[3].y + 2 == points[0].y)
-                SetRight();
+            if (newPoints[3].Y + 2 == newPoints[0].Y)
+                SetRight(newPoints);
             else
-                if (points[3].y - 2 == points[0].y)
-                SetLeft();
+                if (newPoints[3].Y - 2 == newPoints[0].Y)
+                SetLeft(newPoints);
             else
-                if (points[3].x + 2 == points[0].x)
-                SetDefalt();
+                if (newPoints[3].X + 2 == newPoints[0].X)
+                SetDefalt(newPoints);
             else
-                SetConversaly();
-            Draw();
+                SetConversaly(newPoints);
         }
 
-        private void SetConversaly()
+        private void SetConversaly(Point[] newPoints)
         {
-            points[1].x += 1;
-            points[1].y += 1;
-            points[2].x -= 1;
-            points[2].y += 1;
-            points[3].x -= 2;
-            points[3].y += 2;
+            newPoints[1].X += 1;
+            newPoints[1].Y += 1;
+            newPoints[2].X -= 1;
+            newPoints[2].Y += 1;
+            newPoints[3].X -= 2;
+            newPoints[3].Y += 2;
         }
 
-        private void SetDefalt()
+        private void SetDefalt(Point[] newPoints)
         {
-            points[1].x -= 1;
-            points[1].y -= 1;
-            points[2].x += 1;
-            points[2].y -= 1;
-            points[3].x += 2;
-            points[3].y -= 2;
+            newPoints[1].X -= 1;
+            newPoints[1].Y -= 1;
+            newPoints[2].X += 1;
+            newPoints[2].Y -= 1;
+            newPoints[3].X += 2;
+            newPoints[3].Y -= 2;
         }
 
-        private void SetLeft()
+        private void SetLeft(Point[] newPoints)
         {
-            points[1].x -= 1;
-            points[1].y += 1;
-            points[2].x -= 1;
-            points[2].y -= 1;
-            points[3].x -= 2;
-            points[3].y -= 2;
+            newPoints[1].X -= 1;
+            newPoints[1].Y += 1;
+            newPoints[2].X -= 1;
+            newPoints[2].Y -= 1;
+            newPoints[3].X -= 2;
+            newPoints[3].Y -= 2;
         }
 
-        private void SetRight()
+        private void SetRight(Point[] newPoints)
         {
-            points[1].x += 1;
-            points[1].y -= 1;
-            points[2].x += 1;
-            points[2].y += 1;
-            points[3].x += 2;
-            points[3].y += 2;
+            newPoints[1].X += 1;
+            newPoints[1].Y -= 1;
+            newPoints[2].X += 1;
+            newPoints[2].Y += 1;
+            newPoints[3].X += 2;
+            newPoints[3].Y += 2;
         }
 
     }
