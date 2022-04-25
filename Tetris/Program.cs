@@ -2,6 +2,7 @@
 {
     public class Program
     {
+        static RandFig generator;
         static void Main(string[] args)
         {
             Console.SetWindowSize(Field.Width, Field.Height);
@@ -9,7 +10,7 @@
 
             Point p = new(20, 4);
 
-            RandFig generator = new RandFig(p);
+            generator = new RandFig(p);
             Figure s = generator.GetNewFigure();
 
             while (true)
@@ -17,50 +18,50 @@
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
-                    HandleKey(s, key);
+                    Strike result = HandleKey(s, key);
+                    ProcessResult(result, ref s);
                 }
             }
-
-
-            Console.ReadLine();
         }
 
-        private static void HandleKey(Figure s, ConsoleKeyInfo key)
+        private static bool ProcessResult(Strike result, ref Figure s)
+        {
+            if (result == Strike.HEAP_STRIKE || result == Strike.DOWN_STRIKE)
+            {
+                Field.AddFigure(s);
+                s = generator.GetNewFigure();
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private static Strike HandleKey(Figure s, ConsoleKeyInfo key)
         {
             switch (key.Key)
             { 
                 case ConsoleKey.Spacebar:
-                    s.TryRotate();
-                    break;
+                    return s.TryRotate();
                 case ConsoleKey.LeftArrow:
-                    s.TryMove(Direction.LEFT);
-                    break;
+                    return s.TryMove(Direction.LEFT);
                 case ConsoleKey.RightArrow:
-                    s.TryMove(Direction.RIGHT);
-                    break;
+                    return s.TryMove(Direction.RIGHT);
                 case ConsoleKey.DownArrow:
-                    s.TryMove(Direction.DOWN);
-                    break;
+                    return s.TryMove(Direction.DOWN);
                 case ConsoleKey.A:
-                    s.TryMove(Direction.LEFT);
-                    break;
+                    return s.TryMove(Direction.LEFT);
                 case ConsoleKey.D:
-                    s.TryMove(Direction.RIGHT);
-                    break;
+                    return s.TryMove(Direction.RIGHT);
                 case ConsoleKey.S:
-                    s.TryMove(Direction.DOWN);
-                    break;
+                    return s.TryMove(Direction.DOWN);
                 case ConsoleKey.NumPad2:
-                    s.TryMove(Direction.DOWN);
-                    break;
+                    return s.TryMove(Direction.DOWN);
                 case ConsoleKey.NumPad4:
-                    s.TryMove(Direction.LEFT);
-                    break;
+                    return s.TryMove(Direction.LEFT);
                 case ConsoleKey.NumPad6:
-                    s.TryMove(Direction.RIGHT);
-                    break;
+                    return s.TryMove(Direction.RIGHT);
             }
-
+            return Strike.NOTHING;
         }
     }
     
