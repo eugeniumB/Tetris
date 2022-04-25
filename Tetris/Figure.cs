@@ -42,35 +42,46 @@ namespace Tetris
 
         public abstract void Rotate(Point[] newPoints);
 
-        internal void TryRotate()
+        internal Strike TryRotate()
         {
             Hide();
             Point[] clone = Clone();
             Rotate(clone);
-            if (VerifyPosition(clone))
+
+            Strike result = VerifyPosition(clone);
+            if (result == Strike.NOTHING)
                 Points = clone;
             Draw();
+            return result;
         }
 
-
-        internal void TryMove(Direction dir)
+        internal Strike TryMove(Direction dir)
         {
             Hide();
             Point[] clone = Clone();
             Move(clone, dir);
-            if (VerifyPosition(clone))
+
+            Strike result = VerifyPosition(clone);
+            if (result == Strike.NOTHING)
                 Points = clone;
             Draw();
+            return result;
         }
 
-        private bool VerifyPosition(Point[] pList)
+        private Strike VerifyPosition(Point[] pList)
         {
             foreach (Point p in pList)
             {
-                if (p.X < 0 || p.Y < 0 || p.X >= Field.Width || p.Y >= Field.Height)
-                    return false;
+                if (p.X < 0 || p.Y < 0 || p.X >= Field.Width)
+                    return Strike.BORDER_STRIKE;
+
+                if (p.Y >= Field.Height)
+                    return Strike.DOWN_STRIKE;
+
+                if (Field.CheckStike(p))
+                    return Strike.HEAP_STRIKE;
             }
-            return true;
+            return Strike.NOTHING;
         }
 
         private Point[] Clone()
