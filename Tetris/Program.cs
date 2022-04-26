@@ -24,6 +24,14 @@
             }
         }
 
+        private static bool CheckFully()
+        {
+
+
+
+            return true;
+        }
+
         private static bool ProcessResult(Strike result, ref Figure s)
         {
             if (result == Strike.HEAP_STRIKE || result == Strike.DOWN_STRIKE)
