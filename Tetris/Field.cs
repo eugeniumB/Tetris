@@ -41,12 +41,20 @@ namespace Tetris
 
         private static bool[][] _heap;
 
+        public static Point[][] Heap { get; set; }
+
         static Field()
         {
             _heap = new bool[Height][];
             for (int i = 0; i < Height; i++)
             {
                 _heap[i] = new bool[Width];
+            }
+
+            Heap = new Point[Height][];
+            for (int i = 0; i < Height; i++)
+            {
+                Heap[i] = new Point[Width];
             }
         }
 
@@ -61,6 +69,13 @@ namespace Tetris
             {
                 _heap[p.Y][p.X] = true;
             }
+        }
+
+        public static Point[][] NextHeap(Point[][] heap)
+        {
+            
+
+            return heap;
         }
 
     }
