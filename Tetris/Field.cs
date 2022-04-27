@@ -8,8 +8,8 @@ namespace Tetris
 {
     internal static class Field
     {
-        private static int _windowHeight = 30;
-        private static int _windowWidth = 40;
+        private static int _windowHeight = 15;
+        private static int _windowWidth = 20;
 
         public static int Width
         {
@@ -63,5 +63,27 @@ namespace Tetris
             }
         }
 
+        public static void CheckFullString()
+        {
+            for (int i = 1; i < Height; i++)
+            {
+                for (int j = 1, num = 4; j < Width; j++)
+                {
+                    if (_heap[i][j])
+                        num += num;
+                    if (num == Width)
+                        BreakStroke(i);
+                }
+            }
+        }
+
+        private static void BreakStroke(int stroke)
+        {
+            Console.SetCursorPosition(0, stroke);
+            for (int i = 0; i < Width; i++)
+            {
+                Console.Write(" ");
+            }
+        }
     }
 }
