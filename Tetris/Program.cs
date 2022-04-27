@@ -8,7 +8,7 @@
             Console.SetWindowSize(Field.Width, Field.Height);
             Console.SetBufferSize(Field.Width, Field.Height);
 
-            Point p = new(20, 4);
+            Point p = new(10, 4);
 
             generator = new RandFig(p);
             Figure s = generator.GetNewFigure();
@@ -20,16 +20,11 @@
                     ConsoleKeyInfo key = Console.ReadKey();
                     Strike result = HandleKey(s, key);
                     ProcessResult(result, ref s);
+                    Field.CheckFullString();
                 }
             }
         }
 
-        private static bool CheckFully()
-        {
-
-
-            return true;
-        }
 
         private static bool ProcessResult(Strike result, ref Figure s)
         {
