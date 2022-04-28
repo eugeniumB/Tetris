@@ -8,7 +8,7 @@
             Console.SetWindowSize(Field.Width, Field.Height);
             Console.SetBufferSize(Field.Width, Field.Height);
 
-            Point p = new(10, 4);
+            Point p = new(8, 4);
 
             generator = new RandFig(p);
             Figure s = generator.GetNewFigure();
@@ -20,7 +20,6 @@
                     ConsoleKeyInfo key = Console.ReadKey();
                     Strike result = HandleKey(s, key);
                     ProcessResult(result, ref s);
-                    Field.CheckFullString();
                 }
             }
         }
@@ -32,6 +31,7 @@
             {
                 Field.AddFigure(s);
                 s = generator.GetNewFigure();
+                Field.CheckFullString();
                 return true;
             }
             else
