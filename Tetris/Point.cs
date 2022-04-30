@@ -12,7 +12,7 @@ namespace Tetris
         public int Y { get; set; }
         private char C { get; set; }
 
-        public Point(int x, int y, char symb = '*')
+        public Point(int x, int y, char symb = Drawer.DEFAULT_SYMB)
         {
             X = x;
             Y = y;
