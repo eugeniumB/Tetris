@@ -1,41 +1,66 @@
-﻿namespace Tetris
+﻿using System.Timers;
+
+namespace Tetris
 {
     public class Program
     {
+        const int TIMER_INTERVAL = 500;
+        static System.Timers.Timer aTimer;
+        static private object _lockObject = new object();
+
+        static Figure s;
         static RandFig generator;
         static void Main(string[] args)
         {
             Console.SetWindowSize(Field.Width, Field.Height);
             Console.SetBufferSize(Field.Width, Field.Height);
 
-            Point p = new(8, 4);
+            Point p = new(Field.Width / 2, 4);
 
             generator = new RandFig(p);
-            Figure s = generator.GetNewFigure();
+            s = generator.GetNewFigure();
+            SetTimer();
 
             while (true)
             {
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
+                    Monitor.Enter(_lockObject);
                     Strike result = HandleKey(s, key);
                     ProcessResult(result, ref s);
+                    Monitor.Exit(_lockObject);
                 }
             }
         }
-
 
         private static bool ProcessResult(Strike result, ref Figure s)
         {
             if (result == Strike.HEAP_STRIKE || result == Strike.DOWN_STRIKE)
             {
                 Field.AddFigure(s);
+                Field.CheckAndBreakFullString();
                 s = generator.GetNewFigure();
-                Field.CheckFullString();
                 return true;
             }
             else
                 return false;
+        }
+
+        private static void SetTimer()
+        {
+            aTimer = new System.Timers.Timer(TIMER_INTERVAL);
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
+        }
+
+        private static void OnTimedEvent(object? sender, ElapsedEventArgs e)
+        {
+            Monitor.Enter(_lockObject);
+            Strike result = s.TryMove(Direction.DOWN);
+            ProcessResult(result, ref s);
+            Monitor.Exit(_lockObject);
         }
 
         private static Strike HandleKey(Figure s, ConsoleKeyInfo key)
