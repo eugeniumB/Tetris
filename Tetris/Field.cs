@@ -8,9 +8,9 @@ namespace Tetris
 {
     internal static class Field
     {
-        private static int _windowHeight = 10;
-        private static int _windowWidth = 15;
-
+        private static int _windowHeight = 20;
+        private static int _windowWidth = 20;
+        private static int _score = 0;
         public static int Width
         {
             get 
@@ -39,6 +39,8 @@ namespace Tetris
             }
         }
 
+        public static int Score { get => _score; set => _score = value; }
+
         private static bool[][] _heap;
 
         static Field()
@@ -63,44 +65,49 @@ namespace Tetris
             }
         }
 
-        public static void CheckFullString()
+        public static void CheckAndBreakFullString()
         {
             for (int i = 1; i < Height; i++)
             {
-                int num = 1;
-                for (int j = 1; j < Width; j++)
+                int num = 0;
+                for (int j = 0; j < Width; j++)
                 {
                     if (_heap[i][j])
                         num++;
                 }
                 if (num == Width)
+                {
                     BreakStroke(i);
+                    Score += 100;
+                }
+                Redraw();
+            }
+        }
+
+        private static void Redraw()
+        {
+            for (int j = 1; j < Height; j++)
+            {
+                for (int i = 0; i < Width; i++)
+                {
+                    if (_heap[j][i])
+                        Drawer.DrawPoint(i, j);
+                    else
+                        Drawer.HidePoint(i, j);
+                }
             }
         }
 
         private static void BreakStroke(int numstroke)
         {
-            Console.SetCursorPosition(0, numstroke);
-            for (int i = 0; i < Width; i++)
-            {
-                Console.Write(" ");
-            }
-            for (int i = numstroke; i < Height; i++)
+            for (int i = numstroke; i > 0; i--)
             {
                 for (int j = 0; j < Width; j++)
                 {
-                    _heap[i][j] = false;
-                }
-            }
-            for (int i = numstroke; i >= 1; i--)
-            {
-                for (int j = 0; j < Width; j++)
-                {
-                    if(_heap[i][j])
-                    {
-                        _heap[i + 1][j] = true;
+                    if(i == 0)
                         _heap[i][j] = false;
-                    }
+                    else
+                        _heap[i][j] = _heap[i - 1][j];
                 }
             }
         }
