@@ -10,27 +10,22 @@ namespace Tetris
     {
         public int X { get; set; }
         public int Y { get; set; }
-        private char C { get; set; }
 
-        public Point(int x, int y, char symb = Drawer.DEFAULT_SYMB)
+        public Point(int x, int y)
         {
             X = x;
             Y = y;
-            C = symb;
         }
 
         public Point(Point p)
         {
             X = p.X;
             Y = p.Y;
-            C = p.C;
         }
 
         public void DrawPoint()
         {
-            Console.SetCursorPosition(X, Y);
-            Console.Write(C);
-            Console.SetCursorPosition(0, 0);
+            DrawerProvider.Drawer.DrawPoint(X, Y);
         }
 
         internal void Move(Direction dir)
@@ -51,8 +46,7 @@ namespace Tetris
 
         internal void Hide()
         {
-            Console.SetCursorPosition(X, Y);
-            Console.Write(" ");
+            DrawerProvider.Drawer.HidePoint(X, Y);
         }
     }
 }
