@@ -18,3 +18,8 @@ Tetris/.vs/Tetris/v17/.suo
 *.props
 *.v1
 /.vs/Tetris/v17/.suo
+Tetris/obj/Debug/net6.0/Tetris.csproj.CopyComplete
+Tetris/packages/SmallBasicLib.1.2/.signature.p7s
+Tetris/packages/SmallBasicLib.1.2/lib/SmallBasicLibrary.xml
+Tetris/packages/SmallBasicLib.1.2/lib/SmallBasicLibrary.pt.xml
+Tetris/packages/SmallBasicLib.1.2/SmallBasicLib.1.2.nupkg
