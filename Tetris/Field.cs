@@ -17,12 +17,6 @@ namespace Tetris
             { 
                 return _windowWidth;
             }
-            private set 
-            {
-                _windowWidth = value;
-                Console.SetWindowSize(_windowWidth, Field.Height);
-                Console.SetBufferSize(_windowWidth, Field.Height);
-            }
         }
 
         public static int Height
@@ -30,12 +24,6 @@ namespace Tetris
             get
             {
                 return _windowHeight; 
-            }
-            private set
-            { 
-                _windowHeight = value; 
-                Console.SetWindowSize(_windowHeight, Field.Width);
-                Console.SetBufferSize(_windowHeight, Field.Width);
             }
         }
 
@@ -57,17 +45,22 @@ namespace Tetris
             return _heap[p.Y][p.X];
         }
 
-        public static void AddFigure(Figure fig)
+        public static void AddFigure(Figure figure)
         {
-            foreach (var p in fig.Points)
+            foreach (var p in figure.Points)
             {
                 _heap[p.Y][p.X] = true;
             }
         }
 
-        public static void CheckAndBreakFullString()
+        public static void CheckAndBreakFullString(Figure figure)
         {
-            for (int i = 1; i < Height; i++)
+            int yMax = 1;
+            foreach(Point p in figure.Points)
+            {
+                yMax = Math.Max(yMax, p.Y);
+            }
+            for (int i = yMax - 4; i <= yMax; i++)
             {
                 int num = 0;
                 for (int j = 0; j < Width; j++)
@@ -80,20 +73,20 @@ namespace Tetris
                     BreakStroke(i);
                     Score += 100;
                 }
-                Redraw();
+                Redraw(yMax);
             }
         }
 
-        private static void Redraw()
+        private static void Redraw(int yMax)
         {
-            for (int j = 1; j < Height; j++)
+            for (int j = yMax - 4; j < Height; j++)
             {
                 for (int i = 0; i < Width; i++)
                 {
                     if (_heap[j][i])
-                        Drawer.DrawPoint(i, j);
+                        DrawerProvider.Drawer.DrawPoint(i, j);
                     else
-                        Drawer.HidePoint(i, j);
+                        DrawerProvider.Drawer.HidePoint(i, j);
                 }
             }
         }
