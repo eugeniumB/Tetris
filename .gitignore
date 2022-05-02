@@ -26,3 +26,7 @@ Tetris/packages/SmallBasicLib.1.2/SmallBasicLib.1.2.nupkg
 TetrisGui/App.config
 TetrisGui/bin/Debug/SmallBasicLibrary.xml
 TetrisGui/bin/Debug/TetrisGui.exe.config
+TetrisGui/obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+TetrisGui/obj/Debug/TetrisGui.csproj.CopyComplete
+TetrisGui/packages.config
+TetrisGui/Properties/AssemblyInfo.cs
