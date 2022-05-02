@@ -11,6 +11,7 @@ namespace Tetris
         NOTHING,
         DOWN_STRIKE,
         BORDER_STRIKE,
-        HEAP_STRIKE
+        HEAP_STRIKE,
+        GAME_OVER
     }
 }
