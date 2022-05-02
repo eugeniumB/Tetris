@@ -12,9 +12,8 @@ namespace Tetris
         static RandFig generator;
         static void Main(string[] args)
         {
-            Console.SetWindowSize(Field.Width, Field.Height);
-            Console.SetBufferSize(Field.Width, Field.Height);
-
+            DrawerProvider.Drawer.InifField();
+            DrawerProvider.Drawer.ShowScore();
             Point p = new(Field.Width / 2, 4);
 
             generator = new RandFig(p);
@@ -36,11 +35,20 @@ namespace Tetris
 
         private static bool ProcessResult(Strike result, ref Figure s)
         {
+
             if (result == Strike.HEAP_STRIKE || result == Strike.DOWN_STRIKE)
             {
                 Field.AddFigure(s);
-                Field.CheckAndBreakFullString();
+                Field.CheckAndBreakFullString(s);
+                DrawerProvider.Drawer.ShowScore();
                 s = generator.GetNewFigure();
+                return true;
+            }
+            else
+                if (result == Strike.GAME_OVER)
+            {
+                DrawerProvider.Drawer.GameOver();
+                aTimer.Elapsed -= OnTimedEvent;
                 return true;
             }
             else
