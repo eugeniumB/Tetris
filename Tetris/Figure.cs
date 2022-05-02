@@ -78,6 +78,9 @@ namespace Tetris
                 if (p.Y >= Field.Height)
                     return Strike.DOWN_STRIKE;
 
+                if (Field.CheckStike(p) && p.Y <= 5)
+                    return Strike.GAME_OVER;
+
                 if (Field.CheckStike(p))
                     return Strike.HEAP_STRIKE;
             }
