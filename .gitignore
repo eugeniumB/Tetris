@@ -30,3 +30,12 @@ TetrisGui/obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
 TetrisGui/obj/Debug/TetrisGui.csproj.CopyComplete
 TetrisGui/packages.config
 TetrisGui/Properties/AssemblyInfo.cs
+Tetris/Tetris.sln
+Tetris/Tetris.sln
+Tetris/obj/Release/Tetris.1.0.0.nuspec
+Tetris/obj/Release/net6.0/Tetris.GlobalUsings.g.cs
+Tetris/obj/Release/net6.0/Tetris.GeneratedMSBuildEditorConfig.editorconfig
+Tetris/obj/Release/net6.0/Tetris.csproj.CopyComplete
+Tetris/obj/Release/net6.0/Tetris.AssemblyInfo.cs
+Tetris/obj/Release/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+Tetris/bin/Release/Tetris.1.0.0.nupkg
